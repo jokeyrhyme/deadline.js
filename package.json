@@ -1,0 +1,53 @@
+{
+  "name": "@jokeyrhyme/deadline",
+  "version": "1.0.0",
+  "description": "wait for a callback or Promise, but give up if it has been too long",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "pretest": "npm run build",
+    "test": "eslint . && istanbul cover ./tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jokeyrhyme/deadline.js.git"
+  },
+  "keywords": [
+    "deadline",
+    "timeout",
+    "promise",
+    "callback"
+  ],
+  "author": "Ron Waldon (https://github.com/jokeyrhyme)",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/jokeyrhyme/deadline.js/issues"
+  },
+  "homepage": "https://github.com/jokeyrhyme/deadline.js#readme",
+  "devDependencies": {
+    "babelify": "^6.0",
+    "browserify": "^11.0",
+    "eslint": "1.0.0-rc-3",
+    "eslint-config-standard": "4.0.0-2",
+    "gulp": "^3.8",
+    "istanbul": "^0.3",
+    "tape": "^4.0",
+    "tape-chai": "^1.1.0",
+    "vinyl-buffer": "^1.0",
+    "vinyl-source-stream": "^1.1"
+  },
+  "files": [
+    "dist/index.js",
+    "index.js",
+    "LICENSE.txt",
+    "README.md"
+  ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {}
+      ]
+    ]
+  }
+}
