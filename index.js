@@ -4,7 +4,7 @@ module.exports = {
 
   /**
   @param {Promise} promise to wait for
-  @param {Number} timeout maximum milliseconds to wait
+  @param {Number} timeout milliseconds to wait
   @returns {Promise} new Promise rejects when deadline exceeded
   */
   promise: function (promise, timeout) {
@@ -25,6 +25,40 @@ module.exports = {
         if (!isExceeded) {
           clearTimeout(timer);
           reject.apply(promise, arguments);
+        }
+      });
+    });
+  },
+
+  /**
+  @callback ErrorFirstCallback
+  @param {?Error} error or `null` (if no error)
+  @param {...} optional, zero or more return data (if no error)
+  */
+
+  /**
+  @callback FunctionTakingErrorFirstCallback
+  @param {ErrorFirstCallback} called when done
+  */
+
+  /**
+  @param {Function} fn to execute
+  @param {Number} timeout milliseconds to wait
+  @param {ErrorFirstCallback} called with timeout Error or results from fn
+  */
+  callback: function (fn, timeout, callback) {
+    return new Promise(function (resolve, reject) {
+      var isExceeded = false;
+
+      var timer = setTimeout(function () {
+        isExceeded = true;
+        callback(new Error(timeout + 'ms deadline exceeded'));
+      }, timeout);
+
+      fn(function (err, data) {
+        if (!isExceeded) {
+          clearTimeout(timer);
+          callback(err, data);
         }
       });
     });
