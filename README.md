@@ -22,10 +22,12 @@ For example:
 
 ```js
 deadline.promise(makeFastPromise(), 500).then(function () {
+  // onResolve...
   // executed before 500ms, deadline not exceeded
 });
 
-deadline.promise(makeSlowPromise(), 500).then(function () {
+deadline.promise(makeSlowPromise(), 500).then(null, function () {
+  // onReject...
   // executed around 500ms, deadline exceeded
 });
 ```
@@ -42,14 +44,16 @@ For example:
 ```js
 deadline.callback(function (done) {
   fastAsyncFn(1, 2, done);
-}, 500, function () {
+}, 500, function (err, data) {
   // executed before 500ms, deadline not exceeded
+  // `err` and `data` are original values from `fastAsyncFn()`
 });
 
 deadline.callback(function (done) {
   slowAsyncFn(1, 2, done);
-}, 500, function () {
+}, 500, function (err) {
   // executed around 500ms, deadline exceeded
+  // `err` is the deadline Error
 });
 ```
 
