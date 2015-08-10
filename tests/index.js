@@ -107,3 +107,45 @@ test('deadline=1500ms, oneSecCallbackLast, callback called', function (t) {
     t.equal(data, 'abc');
   });
 });
+
+test('deadline=500ms, fn, not explicitly called', function (t) {
+  var fn = function () {
+    t.pass('fn called as expected');
+    t.end();
+  };
+  t.plan(1);
+  deadline.fn(fn, 500);
+});
+
+test('deadline=500ms, fn, called once', function (t) {
+  var fn = function () {
+    t.pass('fn called as expected');
+    t.end();
+  };
+  t.plan(1);
+  fn = deadline.fn(fn, 500);
+  fn();
+});
+
+test('deadline=500ms, fn.bind(ctx), method not explicitly called', function (t) {
+  var ctx = {};
+  var fn = function () {
+    t.pass('fn called as expected');
+    t.equal(ctx, this, '`this` context preserved');
+    t.end();
+  };
+  t.plan(2);
+  deadline.fn(fn.bind(ctx), 500);
+});
+
+test('deadline=500ms, fn.bind(ctx), method called once', function (t) {
+  var ctx = {};
+  var fn = function () {
+    t.pass('fn called as expected');
+    t.equal(ctx, this, '`this` context preserved');
+    t.end();
+  };
+  t.plan(2);
+  ctx.fn = deadline.fn(fn.bind(ctx), 500);
+  ctx.fn();
+});

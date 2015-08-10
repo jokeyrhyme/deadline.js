@@ -3,6 +3,24 @@
 module.exports = {
 
   /**
+  @param {Function} fn to execute
+  @param {Number} timeout milliseconds to wait
+  @returns {Function} wrapped `fn`, called automatically per-timeout
+  */
+  fn: function (fn, timeout) {
+    var timer;
+    var newFn = function () {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      return fn.apply(this, arguments);
+    };
+    timer = setTimeout(newFn, timeout);
+    return newFn;
+  },
+
+  /**
   @param {Promise} promise to wait for
   @param {Number} timeout milliseconds to wait
   @returns {Promise} new Promise rejects when deadline exceeded

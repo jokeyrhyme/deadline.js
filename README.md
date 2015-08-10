@@ -12,6 +12,21 @@ var deadline = require('@jokeyrhyme/deadline');
 ```
 
 
+### `.fn(fn, timeout)`
+
+- @param {`Function`} fn to execute
+- @param {`Number`} timeout milliseconds to wait
+- @returns {Function} wrapped `fn`, called automatically per-timeout
+
+For example:
+
+```js
+window.addEventListener('online', deadline.fn(function () {
+  // either "online" event, or 500ms passed since declaring this handler
+}, 500), false);
+```
+
+
 ### `.promise(promise, timeout)`
 
 - @param {`Promise`} promise to wait for
