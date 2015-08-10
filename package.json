@@ -1,6 +1,6 @@
 {
   "name": "@jokeyrhyme/deadline",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "wait for a callback or Promise, but give up if it has been too long",
   "main": "index.js",
   "scripts": {
