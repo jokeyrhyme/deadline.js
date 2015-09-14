@@ -25,9 +25,11 @@
   },
   "homepage": "https://github.com/jokeyrhyme/deadline.js#readme",
   "devDependencies": {
+    "@jokeyrhyme/eslint-config-es5": "^1.0.0",
     "babelify": "^6.0",
     "browserify": "^11.0",
     "eslint": "^1.1",
+    "eslint-config-semistandard": "^5.0.0",
     "eslint-config-standard": "^4.0",
     "gulp": "^3.8",
     "istanbul": "^0.3",

@@ -62,7 +62,8 @@ module.exports = {
   /**
   @param {Function} fn to execute
   @param {Number} timeout milliseconds to wait
-  @param {ErrorFirstCallback} called with timeout Error or results from fn
+  @param {ErrorFirstCallback} callback called with timeout Error or results from fn
+  @returns {Promise} accidental Promise
   */
   callback: function (fn, timeout, callback) {
     return new Promise(function (resolve, reject) {
