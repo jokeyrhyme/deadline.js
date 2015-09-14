@@ -66,23 +66,20 @@ module.exports = {
   @param {Function} fn to execute
   @param {Number} timeout milliseconds to wait
   @param {ErrorFirstCallback} callback called with timeout Error or results from fn
-  @returns {Promise} accidental Promise
   */
   callback: function callback(fn, timeout, _callback) {
-    return new Promise(function (resolve, reject) {
-      var isExceeded = false;
+    var isExceeded = false;
 
-      var timer = setTimeout(function () {
-        isExceeded = true;
-        _callback(new Error(timeout + 'ms deadline exceeded'));
-      }, timeout);
+    var timer = setTimeout(function () {
+      isExceeded = true;
+      _callback(new Error(timeout + 'ms deadline exceeded'));
+    }, timeout);
 
-      fn(function (err, data) {
-        if (!isExceeded) {
-          clearTimeout(timer);
-          _callback(err, data);
-        }
-      });
+    fn(function (err, data) {
+      if (!isExceeded) {
+        clearTimeout(timer);
+        _callback(err, data);
+      }
     });
   }
 
