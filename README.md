@@ -5,6 +5,12 @@ wait for a callback or Promise, but give up if it has been too long
 [![npm module](https://img.shields.io/npm/v/@jokeyrhyme/deadline.svg)](https://www.npmjs.com/package/@jokeyrhyme/deadline)
 [![travis-ci](https://img.shields.io/travis/jokeyrhyme/deadline.js.svg)](https://travis-ci.org/jokeyrhyme/deadline.js)
 
+
+## ABANDONED
+
+Use [p-timeout](https://github.com/sindresorhus/p-timeout) instead
+
+
 ## API
 
 ```js
